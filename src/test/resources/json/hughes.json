@@ -1,0 +1,36 @@
+[
+    {
+        "SourceURL": "/openfeeds/practicesaberopen.json",
+        "index": "39.33235:N/A",
+        "description": "<br/><b>LastUpdatedBy: <\/b>target@xcore.spotonresponse.com<br/><b>Status: <\/b>Hughes No Credit Card Activity<br/><b>Zip: <\/b>21220<br/><b>ActivityStatus: <\/b>Hughes No Credit Card Activity<br/><b>CreatedBy: <\/b>target@xcore.spotonresponse.com<br/><b>ActivityName: <\/b>No Card Activity-Taco Bell<br/><b>Address: <\/b>1431 Fuselage Ave<br/><b>CompanyID: <\/b>Taco Bell<br/><b>WorkProductIdentification: <\/b>Incident-d9a31262-3877-4289-aa86-1e43c343c57c<br/><b>DeviceID: <\/b>DD032672D<br/><b>Store Type: <\/b>FOOD<br/><b>ActivityCategoryText: <\/b>Closed-FOOD<br/><b>Latitude: <\/b>39.33235<br/><b>City: <\/b>Middle River<br/><b>Longitude: <\/b>-76.44546<br/><b>DateTime: <\/b>2018-02-05T22:29:38+00:00<br/><b>Created: <\/b>2018-02-05T22:29:38+00:00<br/><b>AssociatedGroupIdentifier: <\/b>IG-24a74fe9-81bb-4aff-9908-172f3dd6a1ee<br/><b>OBJECTID: <\/b>76<br/><b>Type: <\/b>DSL<br/><b>Version: <\/b>1<br/><b>Checksum: <\/b>Mon Feb 05 22:29:38 UTC 2018:1:2:37633637<br/><b>State: <\/b>MD<br/><b>LastUpdated: <\/b>2018-02-05T22:29:38+00:00",
+        "md5hash": "91CDDE462D0C42D85057889A811D258A",
+        "title": "SaberOpen-No Card Activity-Taco BellSuffix.Title",
+        "content": "[target@xcore.spotonresponse.com:Hughes No Credit Card Activity:21220:Hughes No Credit Card Activity:target@xcore.spotonresponse.com:No Card Activity-Taco Bell:1431 Fuselage Ave:Taco Bell:Incident-d9a31262-3877-4289-aa86-1e43c343c57c:DD032672D:FOOD:Closed-FOOD:39.33235:Middle River:-76.44546:2018-02-05T22:29:38+00:00:2018-02-05T22:29:38+00:00:IG-24a74fe9-81bb-4aff-9908-172f3dd6a1ee:76:DSL:1:Mon Feb 05 22:29:38 UTC 2018:1:2:37633637:MD:2018-02-05T22:29:38+00:00]",
+        "Source": "CSV Adapter",
+        "SourceHost": "app.spotonresponse.com",
+        "filter": "Hughes No Credit Card Activity",
+        "where": {
+            "Point": {
+                "pos": "39.33235 -76.44546"
+            }
+        },
+        "category": "Hughes No Credit Card Activity-Category.Suffix"
+    },
+    {
+        "SourceURL": "/fieldnotes/features.json.php",
+        "Mapping Category": "N/A",
+        "index": "38.58249:-121.49417",
+        "description": "<br/><b>synced: <\/b><br/><b>notes: <\/b><br/><b>timezone: <\/b>PST<br/><b>igid: <\/b><br/><b>description: <\/b><br/><b>accuracy: <\/b>1004.00<br/><b>Latitude: <\/b>38.58249<br/><b>recorded: <\/b>2018-01-29 15:43:36 UTC<br/><b>Longitude: <\/b>-121.49417<br/><b>operator: <\/b>anne.rosinski@conservation.ca.gov<br/><b>site: <\/b>San Mateo<br/><b>form: <\/b>General<br/><b>attachment: <\/b><br/><b>zaccuracy: <\/b><br/><b>timestamp: <\/b>Mon, Jan 29 2018 7:43am",
+        "md5hash": "0A19C5AF94B5ED0FAB82FCAEDE3F08CB",
+        "content": "[::PST:::1004.00:38.58249:2018-01-29 15:43:36 UTC:-121.49417:anne.rosinski@conservation.ca.gov:San Mateo:General:::Mon, Jan 29 2018 7:43am]",
+        "Source": "https://bayquakealliance.org/fieldnotes/features.json.php",
+        "SourceHost": "bayquakealliance.org",
+        "Mapping Title": "landslide",
+        "filter": "N/A",
+        "where": {
+            "Point": {
+                "pos": "38.58249 -121.49417"
+            }
+        }
+    }
+]

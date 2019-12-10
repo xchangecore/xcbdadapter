@@ -1,0 +1,22 @@
+[
+    [
+        {
+            "creator": "test.landslide",
+            "SourceURL": "https://bayquakealliance.org/fieldnotes/features.json.php",
+            "description": "<br/><b>damage: <\/b> <br/><b>synced: <\/b> <br/><b>stories: <\/b> <br/><b>notes: <\/b> <br/><b>timezone: <\/b>PDT<br/><b>use: <\/b> <br/><b>igid: <\/b> <br/><b>description: <\/b> <br/><b>accuracy: <\/b>65.00<br/><b>Latitude: <\/b>37.45648<br/><b>recorded: <\/b>2014-05-07 20:08:07 UTC<br/><b>type: <\/b> <br/><b>Longitude: <\/b>-122.17131<br/><b>operator: <\/b>lblair@usgs.gov<br/><b>Mapping Site: <\/b>usgs<br/><b>Mapping Form: <\/b>Building<br/><b>attachment: <\/b> <br/><b>safety: <\/b> <br/><b>investigation: <\/b>no<br/><b>zaccuracy: <\/b>10.00<br/><b>timestamp: <\/b>Wed, May 7 2014 1:07pm",
+            "index": "37.45648:-122.17131",
+            "md5hash": "DAFEA7061E6D0AF3A8639949B40D664C",
+            "title": "null:null",
+            "content": "[ : : : :PDT: : : :65.00:37.45648:2014-05-07 20:08:07 UTC: :-122.17131:lblair@usgs.gov:usgs:Building: : :no:10.00:Wed, May 7 2014 1:07pm]",
+            "Source": "Saber JSON Adapter",
+            "SourceHost": "bayquakealliance.org",
+            "filter": "",
+            "lastUpdated": "Mar 1, 2019 6:41:18 PM",
+            "where": {
+                "Point": {
+                    "pos": "37.45648 -122.17131"
+                }
+            },
+            "category": "null"
+        }
+    ]

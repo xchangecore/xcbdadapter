@@ -1,0 +1,92 @@
+[
+    {
+        "SourceURL": "/openfeeds/practicesaberopen.json",
+        "creator": "saber.hughes",
+        "index": "37.64457:-77.71065",
+        "description": "<br/><b>LastUpdatedBy: <\/b>target@xcore.spotonresponse.com<br/><b>Status: <\/b>Hughes No Credit Card Activity<br/><b>Zip: <\/b>23103<br/><b>ActivityStatus: <\/b>Hughes No Credit Card Activity<br/><b>CreatedBy: <\/b>target@xcore.spotonresponse.com<br/><b>ActivityName: <\/b>No Card Activity-Taco Bell<br/><b>Address: <\/b>26 Broad Street Rd<br/><b>CompanyID: <\/b>Taco Bell<br/><b>WorkProductIdentification: <\/b>Incident-8f902567-9f84-4062-8417-a529363ad015<br/><b>DeviceID: <\/b>DD030374D<br/><b>Store Type: <\/b>FOOD<br/><b>ActivityCategoryText: <\/b>Closed-FOOD<br/><b>Latitude: <\/b>37.64457<br/><b>City: <\/b>Manakin Sabot<br/><b>Longitude: <\/b>-77.71065<br/><b>DateTime: <\/b>2018-02-05T22:29:31+00:00<br/><b>Created: <\/b>2018-02-05T22:29:31+00:00<br/><b>AssociatedGroupIdentifier: <\/b>IG-0b3d0278-77f8-4a00-8821-c5cf840d7446<br/><b>OBJECTID: <\/b>64<br/><b>Type: <\/b>DSL<br/><b>Version: <\/b>1<br/><b>Checksum: <\/b>Mon Feb 05 22:29:30 UTC 2018:1:2:70404251<br/><b>State: <\/b>VA<br/><b>LastUpdated: <\/b>2018-02-05T22:29:31+00:00",
+        "md5hash": "79FE140C3F91148F7D12E7D5BC062041",
+        "title": "SaberOpen-No Card Activity-Taco BellSuffix.Title",
+        "content": "[target@xcore.spotonresponse.com:Hughes No Credit Card Activity:23103:Hughes No Credit Card Activity:target@xcore.spotonresponse.com:No Card Activity-Taco Bell:26 Broad Street Rd:Taco Bell:Incident-8f902567-9f84-4062-8417-a529363ad015:DD030374D:FOOD:Closed-FOOD:37.64457:Manakin Sabot:-77.71065:2018-02-05T22:29:31+00:00:2018-02-05T22:29:31+00:00:IG-0b3d0278-77f8-4a00-8821-c5cf840d7446:64:DSL:1:Mon Feb 05 22:29:30 UTC 2018:1:2:70404251:VA:2018-02-05T22:29:31+00:00]",
+        "Source": "https://app.spotonresponse.com/openfeeds/practicesaberopen.json",
+        "SourceHost": "app.spotonresponse.com",
+        "filter": "Hughes No Credit Card Activity",
+        "where": {
+            "Point": {
+                "pos": "37.64457 -77.71065"
+            }
+        },
+        "category": "Hughes No Credit Card Activity-Category.Suffix"
+    },
+    {
+        "SourceURL": "/openfeeds/practicesaberopen.json",
+        "creator": "saber.hughes",
+        "index": "26.27344:-80.15009",
+        "description": "<br/><b>Zip: <\/b>33064-1324<br/><b>ActivityStatus: <\/b>Closed<br/><b>ActivityName: <\/b>Costco-Smith<br/><b>Address: <\/b>1800 W Sample Rd<br/><b>WorkProductIdentification: <\/b>Incident-02f5556a-c4c6-490d-b30f-92e070066683<br/><b>ActivityCategoryText: <\/b>Costco-Closed<br/><b>Latitude: <\/b>26.27344<br/><b>DateTime: <\/b>2018-02-22T21:44:20+00:00<br/><b>Created: <\/b>2018-02-22T21:44:20+00:00<br/><b>OBJECTID: <\/b>65<br/><b>Gas Station Open/Closed: <\/b>Open<br/><b>Version: <\/b>1<br/><b>Checksum: <\/b>Thu Feb 22 21:44:20 UTC 2018:1:2:1236856549<br/><b>LastUpdated: <\/b>2018-02-22T21:44:20+00:00<br/><b>Notes: <\/b><br/><b>LastUpdatedBy: <\/b>costco@xcore.spotonresponse.com<br/><b>Location #: <\/b>88<br/><b>CreatedBy: <\/b>costco@xcore.spotonresponse.com<br/><b>Location Open/Closed: <\/b>Closed<br/><b>City: <\/b>Smith<br/><b>Longitude: <\/b>-80.15009<br/><b>AssociatedGroupIdentifier: <\/b>IG-810aba1d-d89f-4bf4-9b06-3c3b06dd0ad5<br/><b>Facility Type: <\/b>Warehouse<br/><b>Type: <\/b>Incident<br/><b>State: <\/b>FL<br/><b>Facility Damage: <\/b><br/><b>Power: <\/b>Utility",
+        "md5hash": "4302081F054023CCDB31708154A45E0C",
+        "title": "SaberOpen-Costco-SmithSuffix.Title",
+        "content": "[33064-1324:Closed:Costco-Smith:1800 W Sample Rd:Incident-02f5556a-c4c6-490d-b30f-92e070066683:Costco-Closed:26.27344:2018-02-22T21:44:20+00:00:2018-02-22T21:44:20+00:00:65:Open:1:Thu Feb 22 21:44:20 UTC 2018:1:2:1236856549:2018-02-22T21:44:20+00:00::costco@xcore.spotonresponse.com:88:costco@xcore.spotonresponse.com:Closed:Smith:-80.15009:IG-810aba1d-d89f-4bf4-9b06-3c3b06dd0ad5:Warehouse:Incident:FL::Utility]",
+        "Source": "https://app.spotonresponse.com/openfeeds/practicesaberopen.json",
+        "SourceHost": "app.spotonresponse.com",
+        "filter": "N/A",
+        "where": {
+            "Point": {
+                "pos": "26.27344 -80.15009"
+            }
+        },
+        "category": "N/A-Category.Suffix"
+    },
+    {
+        "SourceURL": "/openfeeds/practicesaberopen.json",
+        "creator": "saber.hughes",
+        "index": "39.17932:-77.24694",
+        "description": "<br/><b>LastUpdatedBy: <\/b>target@xcore.spotonresponse.com<br/><b>Status: <\/b>Hughes No Credit Card Activity<br/><b>Zip: <\/b>20876<br/><b>ActivityStatus: <\/b>Hughes No Credit Card Activity<br/><b>CreatedBy: <\/b>target@xcore.spotonresponse.com<br/><b>ActivityName: <\/b>No Card Activity-Dennys<br/><b>Address: <\/b>11717 Exploration Ln<br/><b>CompanyID: <\/b>Dennys<br/><b>WorkProductIdentification: <\/b>Incident-9e2bcb67-870d-46d1-b76c-ce0f17606b74<br/><b>DeviceID: <\/b>DNYFNLAB<br/><b>Store Type: <\/b>FOOD<br/><b>ActivityCategoryText: <\/b>Closed-FOOD<br/><b>Latitude: <\/b>39.17932<br/><b>City: <\/b>Germantown<br/><b>Longitude: <\/b>-77.24694<br/><b>DateTime: <\/b>2018-02-05T22:30:02+00:00<br/><b>Created: <\/b>2018-02-05T22:30:02+00:00<br/><b>AssociatedGroupIdentifier: <\/b>IG-c4fe78dc-90f5-443e-b45e-cb5cf4fbd28b<br/><b>OBJECTID: <\/b>66<br/><b>Type: <\/b>VSAT<br/><b>Version: <\/b>1<br/><b>Checksum: <\/b>Mon Feb 05 22:30:01 UTC 2018:1:2:4199018180<br/><b>State: <\/b>MD<br/><b>LastUpdated: <\/b>2018-02-05T22:30:02+00:00",
+        "md5hash": "215BA00FC244EA34865BFF17CE662043",
+        "title": "SaberOpen-No Card Activity-DennysSuffix.Title",
+        "content": "[target@xcore.spotonresponse.com:Hughes No Credit Card Activity:20876:Hughes No Credit Card Activity:target@xcore.spotonresponse.com:No Card Activity-Dennys:11717 Exploration Ln:Dennys:Incident-9e2bcb67-870d-46d1-b76c-ce0f17606b74:DNYFNLAB:FOOD:Closed-FOOD:39.17932:Germantown:-77.24694:2018-02-05T22:30:02+00:00:2018-02-05T22:30:02+00:00:IG-c4fe78dc-90f5-443e-b45e-cb5cf4fbd28b:66:VSAT:1:Mon Feb 05 22:30:01 UTC 2018:1:2:4199018180:MD:2018-02-05T22:30:02+00:00]",
+        "Source": "https://app.spotonresponse.com/openfeeds/practicesaberopen.json",
+        "SourceHost": "app.spotonresponse.com",
+        "filter": "Hughes No Credit Card Activity",
+        "where": {
+            "Point": {
+                "pos": "39.17932 -77.24694"
+            }
+        },
+        "category": "Hughes No Credit Card Activity-Category.Suffix"
+    },
+    {
+        "SourceURL": "/openfeeds/practicesaberopen.json",
+        "creator": "saber.hughes",
+        "index": "37.26674:-79.93563",
+        "description": "<br/><b>LastUpdatedBy: <\/b>target@xcore.spotonresponse.com<br/><b>Status: <\/b>Hughes No Credit Card Activity<br/><b>Zip: <\/b>24013<br/><b>ActivityStatus: <\/b>Hughes No Credit Card Activity<br/><b>CreatedBy: <\/b>target@xcore.spotonresponse.com<br/><b>ActivityName: <\/b>No Card Activity-BP Oil<br/><b>Address: <\/b>410 Elm Ave SE<br/><b>CompanyID: <\/b>BP Oil<br/><b>WorkProductIdentification: <\/b>Incident-873d77a0-c8a7-4b62-9e48-ff9ce05561bd<br/><b>DeviceID: <\/b>P9380601<br/><b>Store Type: <\/b>FUEL<br/><b>ActivityCategoryText: <\/b>Closed-FUEL<br/><b>Latitude: <\/b>37.26674<br/><b>City: <\/b>Roanoke<br/><b>Longitude: <\/b>-79.93563<br/><b>DateTime: <\/b>2018-02-05T22:29:25+00:00<br/><b>Created: <\/b>2018-02-05T22:29:25+00:00<br/><b>AssociatedGroupIdentifier: <\/b>IG-e0caa3b8-b3ad-4f4e-b61e-0c17e4cb340d<br/><b>OBJECTID: <\/b>67<br/><b>Type: <\/b>VSAT<br/><b>Version: <\/b>1<br/><b>Checksum: <\/b>Mon Feb 05 22:29:24 UTC 2018:1:2:3668093537<br/><b>State: <\/b>VA<br/><b>LastUpdated: <\/b>2018-02-05T22:29:25+00:00",
+        "md5hash": "01917DBA15F4892302BB341D6D6132C1",
+        "title": "SaberOpen-No Card Activity-BP OilSuffix.Title",
+        "content": "[target@xcore.spotonresponse.com:Hughes No Credit Card Activity:24013:Hughes No Credit Card Activity:target@xcore.spotonresponse.com:No Card Activity-BP Oil:410 Elm Ave SE:BP Oil:Incident-873d77a0-c8a7-4b62-9e48-ff9ce05561bd:P9380601:FUEL:Closed-FUEL:37.26674:Roanoke:-79.93563:2018-02-05T22:29:25+00:00:2018-02-05T22:29:25+00:00:IG-e0caa3b8-b3ad-4f4e-b61e-0c17e4cb340d:67:VSAT:1:Mon Feb 05 22:29:24 UTC 2018:1:2:3668093537:VA:2018-02-05T22:29:25+00:00]",
+        "Source": "https://app.spotonresponse.com/openfeeds/practicesaberopen.json",
+        "SourceHost": "app.spotonresponse.com",
+        "filter": "Hughes No Credit Card Activity",
+        "where": {
+            "Point": {
+                "pos": "37.26674 -79.93563"
+            }
+        },
+        "category": "Hughes No Credit Card Activity-Category.Suffix"
+    },
+    {
+        "SourceURL": "/openfeeds/practicesaberopen.json",
+        "creator": "saber.hughes",
+        "index": "39.00523:-78.33781",
+        "description": "<br/><b>LastUpdatedBy: <\/b>target@xcore.spotonresponse.com<br/><b>Status: <\/b>Hughes No Credit Card Activity<br/><b>Zip: <\/b>22657<br/><b>ActivityStatus: <\/b>Hughes No Credit Card Activity<br/><b>CreatedBy: <\/b>target@xcore.spotonresponse.com<br/><b>ActivityName: <\/b>No Card Activity-Dennys<br/><b>Address: <\/b>119 HITE LANE<br/><b>CompanyID: <\/b>Dennys<br/><b>WorkProductIdentification: <\/b>Incident-f629eb9f-6399-4f57-abc2-063f509e5c2b<br/><b>DeviceID: <\/b>DNYF7826<br/><b>Store Type: <\/b>FOOD<br/><b>ActivityCategoryText: <\/b>Closed-FOOD<br/><b>Latitude: <\/b>39.00523<br/><b>City: <\/b>STRASBURG<br/><b>Longitude: <\/b>-78.33781<br/><b>DateTime: <\/b>2018-02-05T22:29:28+00:00<br/><b>Created: <\/b>2018-02-05T22:29:28+00:00<br/><b>AssociatedGroupIdentifier: <\/b>IG-27b27f89-8b6e-45fa-93d7-17002e101202<br/><b>OBJECTID: <\/b>68<br/><b>Type: <\/b>VSAT<br/><b>Version: <\/b>1<br/><b>Checksum: <\/b>Mon Feb 05 22:29:27 UTC 2018:1:2:2906421393<br/><b>State: <\/b>VA<br/><b>LastUpdated: <\/b>2018-02-05T22:29:28+00:00",
+        "md5hash": "B1315CA50C2E38EF4C94634E3784E36B",
+        "title": "SaberOpen-No Card Activity-DennysSuffix.Title",
+        "content": "[target@xcore.spotonresponse.com:Hughes No Credit Card Activity:22657:Hughes No Credit Card Activity:target@xcore.spotonresponse.com:No Card Activity-Dennys:119 HITE LANE:Dennys:Incident-f629eb9f-6399-4f57-abc2-063f509e5c2b:DNYF7826:FOOD:Closed-FOOD:39.00523:STRASBURG:-78.33781:2018-02-05T22:29:28+00:00:2018-02-05T22:29:28+00:00:IG-27b27f89-8b6e-45fa-93d7-17002e101202:68:VSAT:1:Mon Feb 05 22:29:27 UTC 2018:1:2:2906421393:VA:2018-02-05T22:29:28+00:00]",
+        "Source": "https://app.spotonresponse.com/openfeeds/practicesaberopen.json",
+        "SourceHost": "app.spotonresponse.com",
+        "filter": "Hughes No Credit Card Activity",
+        "where": {
+            "Point": {
+                "pos": "39.00523 -78.33781"
+            }
+        },
+        "category": "Hughes No Credit Card Activity-Category.Suffix"
+    }
+]

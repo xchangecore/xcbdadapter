@@ -1,0 +1,92 @@
+[
+    {
+        "SourceURL": "/SorGeoJson/rest/data",
+        "creator": "xcore",
+        "index": "42.01154:-93.21053",
+        "description": "<br/><b>LastUpdatedBy: <\/b>saberconnectivity@xcore.spotonresponse.com<br/><b>ActivityStatus: <\/b>Iowa<br/><b>Comment: <\/b>If you are seeing this, you are connected to SABER.  For more information, enroll at www.SABERspace.org.<br/><b>CreatedBy: <\/b>saberconnectivity@xcore.spotonresponse.com<br/><b>SABER Member: <\/b>Pending<br/><b>ActivityName: <\/b>SABER CONNECTIVITY VERIFICATION-Iowa<br/><b>WorkProductIdentification: <\/b>Incident-ff3af060-56e6-47ea-a6cb-0ac390e3b758<br/><b>ActivityCategoryText: <\/b>SABER-Pending<br/><b>Latitude: <\/b>42.01154<br/><b>Longitude: <\/b>-93.21053<br/><b>DateTime: <\/b>2018-12-11T15:43:10+00:00<br/><b>Created: <\/b>2018-12-11T15:43:10+00:00<br/><b>AssociatedGroupIdentifier: <\/b>IG-5f6e4dd2-6e79-43ff-a148-7686284ae4c7<br/><b>OBJECTID: <\/b>45<br/><b>Type: <\/b>Incident<br/><b>Version: <\/b>1<br/><b>Checksum: <\/b>Tue Dec 11 15:43:10 UTC 2018:1:2:380043255<br/><b>State: <\/b>Iowa<br/><b>LastUpdated: <\/b>2018-12-11T15:43:10+00:00",
+        "md5hash": "E66BA70E465D38B70C335ABFAF6D1232",
+        "title": "XCore-SABER CONNECTIVITY VERIFICATION-Iowa",
+        "content": "[saberconnectivity@xcore.spotonresponse.com:Iowa:If you are seeing this, you are connected to SABER.  For more information, enroll at www.SABERspace.org.:saberconnectivity@xcore.spotonresponse.com:Pending:SABER CONNECTIVITY VERIFICATION-Iowa:Incident-ff3af060-56e6-47ea-a6cb-0ac390e3b758:SABER-Pending:42.01154:-93.21053:2018-12-11T15:43:10+00:00:2018-12-11T15:43:10+00:00:IG-5f6e4dd2-6e79-43ff-a148-7686284ae4c7:45:Incident:1:Tue Dec 11 15:43:10 UTC 2018:1:2:380043255:Iowa:2018-12-11T15:43:10+00:00]",
+        "Source": "https://xcore.spotonresponse.com/SorGeoJson/rest/data?core=https://xcore.spotonresponse.com&username=admin&password=SpotOn2017!&coreversion=2&productType=incident",
+        "SourceHost": "xcore.spotonresponse.com",
+        "filter": "Pending",
+        "where": {
+            "Point": {
+                "pos": "42.01154 -93.21053"
+            }
+        },
+        "category": "SABER-Pending"
+    },
+    {
+        "SourceURL": "/SorGeoJson/rest/data",
+        "creator": "xcore",
+        "index": "42.16573:-74.94805",
+        "description": "<br/><b>LastUpdatedBy: <\/b>saberconnectivity@xcore.spotonresponse.com<br/><b>ActivityStatus: <\/b>New York<br/><b>Comment: <\/b>If you are seeing this, you are connected to SABER.  For more information, enroll at www.SABERspace.org.<br/><b>CreatedBy: <\/b>saberconnectivity@xcore.spotonresponse.com<br/><b>SABER Member: <\/b>Pending<br/><b>ActivityName: <\/b>SABER CONNECTIVITY VERIFICATION-New York<br/><b>WorkProductIdentification: <\/b>Incident-4299adfa-5856-44d4-a7dd-5127bd1a64bf<br/><b>ActivityCategoryText: <\/b>SABER-Pending<br/><b>Latitude: <\/b>42.16573<br/><b>Longitude: <\/b>-74.94805<br/><b>DateTime: <\/b>2018-12-11T15:42:54+00:00<br/><b>Created: <\/b>2018-12-11T15:42:54+00:00<br/><b>AssociatedGroupIdentifier: <\/b>IG-2fa7716a-70c7-4bff-b4d9-1ef4416ff40d<br/><b>OBJECTID: <\/b>46<br/><b>Type: <\/b>Incident<br/><b>Version: <\/b>1<br/><b>Checksum: <\/b>Tue Dec 11 15:42:54 UTC 2018:1:2:1826780662<br/><b>State: <\/b>New York<br/><b>LastUpdated: <\/b>2018-12-11T15:42:54+00:00",
+        "md5hash": "086C0F190BCC853A596D60D42D24E55D",
+        "title": "XCore-SABER CONNECTIVITY VERIFICATION-New York",
+        "content": "[saberconnectivity@xcore.spotonresponse.com:New York:If you are seeing this, you are connected to SABER.  For more information, enroll at www.SABERspace.org.:saberconnectivity@xcore.spotonresponse.com:Pending:SABER CONNECTIVITY VERIFICATION-New York:Incident-4299adfa-5856-44d4-a7dd-5127bd1a64bf:SABER-Pending:42.16573:-74.94805:2018-12-11T15:42:54+00:00:2018-12-11T15:42:54+00:00:IG-2fa7716a-70c7-4bff-b4d9-1ef4416ff40d:46:Incident:1:Tue Dec 11 15:42:54 UTC 2018:1:2:1826780662:New York:2018-12-11T15:42:54+00:00]",
+        "Source": "https://xcore.spotonresponse.com/SorGeoJson/rest/data?core=https://xcore.spotonresponse.com&username=admin&password=SpotOn2017!&coreversion=2&productType=incident",
+        "SourceHost": "xcore.spotonresponse.com",
+        "filter": "Pending",
+        "where": {
+            "Point": {
+                "pos": "42.16573 -74.94805"
+            }
+        },
+        "category": "SABER-Pending"
+    },
+    {
+        "SourceURL": "/SorGeoJson/rest/data",
+        "creator": "xcore",
+        "index": "33.72976:-111.43122",
+        "description": "<br/><b>LastUpdatedBy: <\/b>saberconnectivity@xcore.spotonresponse.com<br/><b>ActivityStatus: <\/b>Arizona<br/><b>Comment: <\/b>If you are seeing this, you are connected to SABER.  For more information, enroll at www.SABERspace.org.<br/><b>CreatedBy: <\/b>saberconnectivity@xcore.spotonresponse.com<br/><b>SABER Member: <\/b>Active<br/><b>ActivityName: <\/b>SABER CONNECTIVITY VERIFICATION-Arizona<br/><b>WorkProductIdentification: <\/b>Incident-1a40963c-5597-40b5-9ac6-b4880bbf871e<br/><b>ActivityCategoryText: <\/b>SABER-Active<br/><b>Latitude: <\/b>33.72976<br/><b>Longitude: <\/b>-111.43122<br/><b>DateTime: <\/b>2018-12-11T15:42:48+00:00<br/><b>Created: <\/b>2018-12-11T15:42:48+00:00<br/><b>AssociatedGroupIdentifier: <\/b>IG-59161fb0-a0d0-44e2-b9aa-6234314053dd<br/><b>OBJECTID: <\/b>47<br/><b>Type: <\/b>Incident<br/><b>Version: <\/b>1<br/><b>Checksum: <\/b>Tue Dec 11 15:42:47 UTC 2018:1:2:3337256579<br/><b>State: <\/b>Arizona<br/><b>LastUpdated: <\/b>2018-12-11T15:42:48+00:00",
+        "md5hash": "555E35BA7E666519C0CA7E99F038CE31",
+        "title": "XCore-SABER CONNECTIVITY VERIFICATION-Arizona",
+        "content": "[saberconnectivity@xcore.spotonresponse.com:Arizona:If you are seeing this, you are connected to SABER.  For more information, enroll at www.SABERspace.org.:saberconnectivity@xcore.spotonresponse.com:Active:SABER CONNECTIVITY VERIFICATION-Arizona:Incident-1a40963c-5597-40b5-9ac6-b4880bbf871e:SABER-Active:33.72976:-111.43122:2018-12-11T15:42:48+00:00:2018-12-11T15:42:48+00:00:IG-59161fb0-a0d0-44e2-b9aa-6234314053dd:47:Incident:1:Tue Dec 11 15:42:47 UTC 2018:1:2:3337256579:Arizona:2018-12-11T15:42:48+00:00]",
+        "Source": "https://xcore.spotonresponse.com/SorGeoJson/rest/data?core=https://xcore.spotonresponse.com&username=admin&password=SpotOn2017!&coreversion=2&productType=incident",
+        "SourceHost": "xcore.spotonresponse.com",
+        "filter": "Active",
+        "where": {
+            "Point": {
+                "pos": "33.72976 -111.43122"
+            }
+        },
+        "category": "SABER-Active"
+    },
+    {
+        "SourceURL": "/SorGeoJson/rest/data",
+        "creator": "xcore",
+        "index": "37.66814:-84.67007",
+        "description": "<br/><b>LastUpdatedBy: <\/b>saberconnectivity@xcore.spotonresponse.com<br/><b>ActivityStatus: <\/b>Kentucky<br/><b>Comment: <\/b>If you are seeing this, you are connected to SABER.  For more information, enroll at www.SABERspace.org.<br/><b>CreatedBy: <\/b>saberconnectivity@xcore.spotonresponse.com<br/><b>SABER Member: <\/b>Pending<br/><b>ActivityName: <\/b>SABER CONNECTIVITY VERIFICATION-Kentucky<br/><b>WorkProductIdentification: <\/b>Incident-2539e536-e6dd-455b-9233-6913146df072<br/><b>ActivityCategoryText: <\/b>SABER-Pending<br/><b>Latitude: <\/b>37.66814<br/><b>Longitude: <\/b>-84.67007<br/><b>DateTime: <\/b>2018-12-11T15:42:34+00:00<br/><b>Created: <\/b>2018-12-11T15:42:34+00:00<br/><b>AssociatedGroupIdentifier: <\/b>IG-111c0b98-103a-433e-8deb-7eaf9c7b9d27<br/><b>OBJECTID: <\/b>48<br/><b>Type: <\/b>Incident<br/><b>Version: <\/b>1<br/><b>Checksum: <\/b>Tue Dec 11 15:42:34 UTC 2018:1:2:3423054379<br/><b>State: <\/b>Kentucky<br/><b>LastUpdated: <\/b>2018-12-11T15:42:34+00:00",
+        "md5hash": "22C8916C7A9020ADFF9167410BA2060B",
+        "title": "XCore-SABER CONNECTIVITY VERIFICATION-Kentucky",
+        "content": "[saberconnectivity@xcore.spotonresponse.com:Kentucky:If you are seeing this, you are connected to SABER.  For more information, enroll at www.SABERspace.org.:saberconnectivity@xcore.spotonresponse.com:Pending:SABER CONNECTIVITY VERIFICATION-Kentucky:Incident-2539e536-e6dd-455b-9233-6913146df072:SABER-Pending:37.66814:-84.67007:2018-12-11T15:42:34+00:00:2018-12-11T15:42:34+00:00:IG-111c0b98-103a-433e-8deb-7eaf9c7b9d27:48:Incident:1:Tue Dec 11 15:42:34 UTC 2018:1:2:3423054379:Kentucky:2018-12-11T15:42:34+00:00]",
+        "Source": "https://xcore.spotonresponse.com/SorGeoJson/rest/data?core=https://xcore.spotonresponse.com&username=admin&password=SpotOn2017!&coreversion=2&productType=incident",
+        "SourceHost": "xcore.spotonresponse.com",
+        "filter": "Pending",
+        "where": {
+            "Point": {
+                "pos": "37.66814 -84.67007"
+            }
+        },
+        "category": "SABER-Pending"
+    },
+    {
+        "SourceURL": "/SorGeoJson/rest/data",
+        "creator": "xcore",
+        "index": "38.31351:-117.05537",
+        "description": "<br/><b>LastUpdatedBy: <\/b>saberconnectivity@xcore.spotonresponse.com<br/><b>ActivityStatus: <\/b>Nevada<br/><b>Comment: <\/b>If you are seeing this, you are connected to SABER.  For more information, enroll at www.SABERspace.org.<br/><b>CreatedBy: <\/b>saberconnectivity@xcore.spotonresponse.com<br/><b>SABER Member: <\/b>Pending<br/><b>ActivityName: <\/b>SABER CONNECTIVITY VERIFICATION-Nevada<br/><b>WorkProductIdentification: <\/b>Incident-0ffaa724-b0bf-4f7a-af4f-04a370be5268<br/><b>ActivityCategoryText: <\/b>SABER-Pending<br/><b>Latitude: <\/b>38.31351<br/><b>Longitude: <\/b>-117.05537<br/><b>DateTime: <\/b>2018-12-11T15:43:03+00:00<br/><b>Created: <\/b>2018-12-11T15:43:03+00:00<br/><b>AssociatedGroupIdentifier: <\/b>IG-a45505f8-8d1f-4de3-b5ae-fc6b6e72e3f5<br/><b>OBJECTID: <\/b>49<br/><b>Type: <\/b>Incident<br/><b>Version: <\/b>1<br/><b>Checksum: <\/b>Tue Dec 11 15:43:03 UTC 2018:1:2:3165582466<br/><b>State: <\/b>Nevada<br/><b>LastUpdated: <\/b>2018-12-11T15:43:03+00:00",
+        "md5hash": "F4B9FE194EAEE65C21D8FCBBAD5F52E2",
+        "title": "XCore-SABER CONNECTIVITY VERIFICATION-Nevada",
+        "content": "[saberconnectivity@xcore.spotonresponse.com:Nevada:If you are seeing this, you are connected to SABER.  For more information, enroll at www.SABERspace.org.:saberconnectivity@xcore.spotonresponse.com:Pending:SABER CONNECTIVITY VERIFICATION-Nevada:Incident-0ffaa724-b0bf-4f7a-af4f-04a370be5268:SABER-Pending:38.31351:-117.05537:2018-12-11T15:43:03+00:00:2018-12-11T15:43:03+00:00:IG-a45505f8-8d1f-4de3-b5ae-fc6b6e72e3f5:49:Incident:1:Tue Dec 11 15:43:03 UTC 2018:1:2:3165582466:Nevada:2018-12-11T15:43:03+00:00]",
+        "Source": "https://xcore.spotonresponse.com/SorGeoJson/rest/data?core=https://xcore.spotonresponse.com&username=admin&password=SpotOn2017!&coreversion=2&productType=incident",
+        "SourceHost": "xcore.spotonresponse.com",
+        "filter": "Pending",
+        "where": {
+            "Point": {
+                "pos": "38.31351 -117.05537"
+            }
+        },
+        "category": "SABER-Pending"
+    }
+]
