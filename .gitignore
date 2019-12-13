@@ -4,7 +4,6 @@
 logs/
 data/
 uploads/
-config/
 /app/node
 
 ### STS ###
