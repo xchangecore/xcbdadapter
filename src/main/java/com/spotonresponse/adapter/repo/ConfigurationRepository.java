@@ -22,4 +22,6 @@ public interface ConfigurationRepository extends JpaRepository<Configuration, St
 
     @Query("SELECT c.id FROM Configuration c")
     List<String> listConfigurationName();
+
+    List<Configuration> findByUsername(String username);
 }
