@@ -1,6 +1,6 @@
 package com.spotonresponse.adapter.security.unpw;
 
-import com.spotonresponse.adapter.model.ConfigurationFileAssociation;
+import com.spotonresponse.adapter.model.unpw.ConfigurationFileAssociation;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -12,10 +12,6 @@ public class ConfigUserDetails implements UserDetails {
 
     public ConfigUserDetails(ConfigurationFileAssociation configurationFileAssociation) {
         this.configurationFileAssociation = configurationFileAssociation;
-    }
-
-    public ConfigurationFileAssociation getConfigurationFileAssociation() {
-        return configurationFileAssociation;
     }
 
     @Override

@@ -1,10 +1,11 @@
 package com.spotonresponse.adapter.security.unpw;
 
-import com.spotonresponse.adapter.model.ConfigurationFileAssociation;
+import com.spotonresponse.adapter.model.unpw.ConfigurationFileAssociation;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.security.Keys;
 import lombok.val;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -13,7 +14,8 @@ import java.util.Date;
 
 @Service
 public class JwtService {
-    private String secret = "PTfyogBjQG0XiLbnHu3cjdLjnwxRJ1Cvb6qQMieunMaaHbD7eOYuCwvzRxKEpe9bj6kB1wms4bpXvAR6tf6Jnr15SBZGDL5y";
+    @Value("${jwt.secret}")
+    private String secret;
 
     String generateToken(ConfigurationFileAssociation configFileAssoc){
         val key = Keys.hmacShaKeyFor(secret.getBytes());

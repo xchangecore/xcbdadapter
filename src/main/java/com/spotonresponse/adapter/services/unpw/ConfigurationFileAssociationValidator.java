@@ -1,7 +1,7 @@
 package com.spotonresponse.adapter.services.unpw;
 
-import com.spotonresponse.adapter.model.ConfigurationFileAssociation;
-import com.spotonresponse.adapter.repo.ConfigurationFileAssociationRepository;
+import com.spotonresponse.adapter.model.unpw.ConfigurationFileAssociation;
+import com.spotonresponse.adapter.repo.unpw.ConfigurationFileAssociationRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

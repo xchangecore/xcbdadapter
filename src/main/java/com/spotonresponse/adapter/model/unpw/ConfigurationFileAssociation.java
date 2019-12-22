@@ -1,4 +1,4 @@
-package com.spotonresponse.adapter.model;
+package com.spotonresponse.adapter.model.unpw;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

@@ -1,7 +1,6 @@
 package com.spotonresponse.adapter.security.unpw;
 
-import com.spotonresponse.adapter.repo.ConfigurationFileAssociationRepository;
-import com.spotonresponse.adapter.security.unpw.ConfigUserDetails;
+import com.spotonresponse.adapter.repo.unpw.ConfigurationFileAssociationRepository;
 import lombok.val;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
