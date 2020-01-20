@@ -16,7 +16,6 @@ import java.util.Collection;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.HashSet;
-import java.util.Hashtable;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -36,46 +35,47 @@ public class TheCSVParser {
     private static Logger logger = LoggerFactory.getLogger(CSVParser.class);
 
     private List<MappedRecordJson> mappedRecordJsonList = null;
+    private final List<MappedRecord> notMatchedList = new ArrayList<MappedRecord>();
     private final List<MappedRecord> mappedRecordList = new ArrayList<MappedRecord>();
 
-    private Configuration configuration;
-    private Map<String, String> mappingColumns;
+    private final Configuration configuration;
+    private final Map<String, String> mappingColumns;
 
-    public TheCSVParser(Configuration configuration, List<Map<String, String>> rows) {
+    public TheCSVParser(final Configuration configuration, final List<Map<String, String>> rows) {
 
         this.configuration = configuration;
         mappingColumns = ConfigurationHelper.getMappingColumns(configuration.getMappingColumns());
 
-        List<MappedRecord> recordList = new ArrayList<MappedRecord>();
+        final List<MappedRecord> recordList = new ArrayList<MappedRecord>();
         for (int i = 0; i < rows.size(); i++) {
-            MappedRecord record = toRecord(rows.get(i));
+            final MappedRecord record = toRecord(rows.get(i));
             if (record != null)
                 recordList.add(record);
         }
 
-        List<MappedRecord> mismatched = new ArrayList<MappedRecord>();
         // to apply the distance filter/distance
         // - calculate the bounding box
         // - find out whether the object is within the bounding box
         if (configuration.getDistance() != null && (configuration.getDistanceFilterText() == null
                 || configuration.getDistanceFilterText().equalsIgnoreCase(configuration.getFilterText()))) {
-            Double[][] boundingBox = calculateBoundingBox(recordList, configuration.getDistance());
-            for (MappedRecord record : recordList) {
+            final Double[][] boundingBox = calculateBoundingBox(recordList, configuration.getDistance());
+            for (final MappedRecord record : recordList) {
                 if (Util.IsInsideBoundingBox(boundingBox, record.getLatitude(), record.getLongitude()) == false) {
                     logger.trace("{} is outside bounding box", record);
-                    mismatched.add(record);
+                    notMatchedList.add(record);
                 }
             }
-            if (mismatched.size() > 0) {
-                recordList.removeAll(mismatched);
+            // remove all not macthed in the recordList
+            if (notMatchedList.size() > 0) {
+                recordList.removeAll(notMatchedList);
             }
         }
 
-        Map<String, MappedRecord> recordMap = new HashMap<>();
-        for (MappedRecord record : recordList) {
+        final Map<String, MappedRecord> recordMap = new HashMap<>();
+        for (final MappedRecord record : recordList) {
             recordMap.put(record.getMd5hash(), record);
         }
-        for (MappedRecord r : recordMap.values()) {
+        for (final MappedRecord r : recordMap.values()) {
             mappedRecordList.add(r);
         }
     }
@@ -88,11 +88,33 @@ public class TheCSVParser {
         return mappedRecordList;
     }
 
+    public Set<String> getNotMatchedKeSet() {
+
+        final Set<String> keySet = new HashSet<String>();
+        for (final MappedRecord r : notMatchedList) {
+            keySet.add(r.getIndex());
+        }
+        return keySet;
+    }
+
+    public List<MappedRecord> getNotMatchedList() {
+        return notMatchedList;
+    }
+
+    public Map<String, MappedRecordJson> getJsonRecordMap() {
+
+        final Map<String, MappedRecordJson> map = new HashMap<>();
+        for (final MappedRecord r : mappedRecordList) {
+            map.put(r.getIndex(), new MappedRecordJson(r));
+        }
+        return map;
+    }
+
     public List<MappedRecordJson> getJsonRecordList() {
 
         if (mappedRecordJsonList == null) {
             mappedRecordJsonList = new ArrayList<MappedRecordJson>();
-            for (MappedRecord record : mappedRecordList) {
+            for (final MappedRecord record : mappedRecordList) {
                 mappedRecordJsonList.add(new MappedRecordJson(record));
             }
         }
@@ -102,25 +124,25 @@ public class TheCSVParser {
     //
     // parse the row into the MappedRecordJson
     //
-    private MappedRecord toRecord(Map<String, String> row) {
+    private MappedRecord toRecord(final Map<String, String> row) {
 
-        boolean isFullDescription = configuration.isFullDescription();
+        final boolean isFullDescription = configuration.isFullDescription();
 
-        MappedRecord record = new MappedRecord();
+        final MappedRecord record = new MappedRecord();
         record.setCreator(configuration.getId());
         record.setLastUpdated(new Date());
         setHostAndPath(record, configuration.getJson_ds() == null ? configuration.getUri() + Configuration.S_UrlPostfix
                 : configuration.getJson_ds());
 
         Set<String> columnNames = ConfigurationHelper.getMap(configuration).keySet();
-        for (String columnName : columnNames) {
-            StringBuffer sb = new StringBuffer();
-            List<String> columns = ConfigurationHelper.getMap(configuration).get(columnName);
+        for (final String columnName : columnNames) {
+            final StringBuffer sb = new StringBuffer();
+            final List<String> columns = ConfigurationHelper.getMap(configuration).get(columnName);
             if (columnName.equalsIgnoreCase(ConfigurationHelper.FN_Description) && !isFullDescription) {
-                Set<String> emptySet = new HashSet<String>();
-                for (String column : columns) {
-                    String newKeyName = getMappedName(column);
-                    String value = row.get(column);
+                final Set<String> emptySet = new HashSet<String>();
+                for (final String column : columns) {
+                    final String newKeyName = getMappedName(column);
+                    final String value = row.get(column);
                     if (value != null) {
                         record.getDescMap().put(newKeyName, value);
                     } else {
@@ -128,13 +150,13 @@ public class TheCSVParser {
                     }
                 }
                 if (emptySet.size() > 0) {
-                    for (String key : emptySet) {
+                    for (final String key : emptySet) {
                         record.getDescMap().put(key, "N/A");
                     }
                 }
             } else {
                 int isFirstColumn = 0;
-                for (String column : columns) {
+                for (final String column : columns) {
                     if (isFirstColumn++ > 0) {
                         sb.append(S_TokenSeparator);
                     }
@@ -144,22 +166,12 @@ public class TheCSVParser {
             record.put(columnName, sb.toString().trim());
         }
 
-        // check whether filter match the filter text
-        String filter = record.getFilter();
-        boolean isMatched = isMatchFilter(filter);
-        logger.trace("Filter: [{}] Matched: [{}]", filter, isMatched ? "YES" : "NO");
-
-        // if the filter mis-match then we don't need to continue
-        if (!isMatched) {
-            return null;
-        }
-
         // fill the content with every columns
-        StringBuffer sb = new StringBuffer();
+        final StringBuffer sb = new StringBuffer();
         sb.append("[");
-        Collection<String> values = row.values();
+        final Collection<String> values = row.values();
         int isFirstColumn = 0;
-        for (Object value : values) {
+        for (final Object value : values) {
             if (isFirstColumn++ > 0) {
                 sb.append(S_TokenSeparator);
             }
@@ -170,7 +182,7 @@ public class TheCSVParser {
 
         if (isFullDescription) {
             columnNames = row.keySet();
-            for (String key : columnNames) {
+            for (final String key : columnNames) {
                 if (key.length() == 0)
                     continue;
                 record.getDescMap().put(getMappedName(key), row.get(key));
@@ -207,59 +219,70 @@ public class TheCSVParser {
         }
 
         // set MD5Hash
-        record.setMd5hash(Util.ToHash(record.getIndex()));
+        record.setMd5hash(Util.ToHash(record.getContent()));
+
+        // check whether filter match the filter text
+        final String filter = record.getFilter();
+        final boolean isMatched = isMatchFilter(filter);
+        logger.trace("Filter: [{}] Matched: [{}]", filter, isMatched ? "YES" : "NO");
+
+        // if the filter mis-match then add into notMatchedList and return null
+        if (!isMatched) {
+            notMatchedList.add(record);
+            return null;
+        }
 
         return record;
     }
 
-    private void setHostAndPath(MappedRecord record, String url) {
+    private void setHostAndPath(final MappedRecord record, final String url) {
         try {
-            URL aURL = new URL(url);
+            final URL aURL = new URL(url);
             record.setSourceHost(aURL.getHost());
             record.setSourceURL(aURL.getPath());
-        } catch (MalformedURLException e) {
+        } catch (final MalformedURLException e) {
             e.printStackTrace();
         }
     }
 
-    private boolean isMatchFilter(String filter) {
+    private boolean isMatchFilter(final String filter) {
 
         if (filter == null || filter.length() == 0) {
             return false;
         }
 
-        boolean negativeExpression = configuration.getFilterText().startsWith("!");
-        String filterText = negativeExpression ? configuration.getFilterText().substring(1)
+        final boolean negativeExpression = configuration.getFilterText().startsWith("!");
+        final String filterText = negativeExpression ? configuration.getFilterText().substring(1)
                 : configuration.getFilterText();
-        String pattern = PatternPrefix + filterText + PatternPostfix;
+        final String pattern = PatternPrefix + filterText + PatternPostfix;
         logger.trace("Filter Pattern: " + pattern);
-        boolean isMatched = filter.matches(pattern);
+        final boolean isMatched = filter.matches(pattern);
         return isMatched && negativeExpression == false || isMatched == false && negativeExpression == true;
     }
 
-    private String getMappedName(String name) {
+    private String getMappedName(final String name) {
 
         if (mappingColumns == null) {
             return name;
         }
 
-        String mappedName = mappingColumns.get(name);
+        final String mappedName = mappingColumns.get(name);
         return mappedName != null ? mappedName : name;
     }
 
-    private Double[][] calculateBoundingBox(Collection<MappedRecord> records, String distanceText) {
+    private Double[][] calculateBoundingBox(final Collection<MappedRecord> records, final String distanceText) {
 
-        double distance = new Double(distanceText).doubleValue();
+        final double distance = new Double(distanceText).doubleValue();
 
         double south = 0.0;
         double north = 0.0;
         double west = 0.0;
         double east = 0.0;
-        for (MappedRecord record : records) {
-            double lat = Double.parseDouble(record.getLatitude());
+        for (final MappedRecord record : records) {
+            final double lat = Double.parseDouble(record.getLatitude());
             north = lat > 0 ? lat > north ? lat : north : lat < north ? lat : north;
             south = lat > 0 ? lat < south ? lat : south : lat > south ? lat : south;
-            double lon = Double.parseDouble(record.getLongitude());
+            final double lon = Double.parseDouble(record.getLongitude());
             west = lon > 0 ? lon < west ? lon : west : lon > west ? west : lon;
             east = lon > 0 ? lon > east ? lon : east : lon < east ? east : lon;
             if (south == 0) {
@@ -282,17 +305,17 @@ public class TheCSVParser {
          * OffsetPosition, decimal degrees latO = lat + dLat * 180/Pi lonO = lon + dLon
          * * 180/Pi
          */
-        double d = distance * 1000.0;
-        double deltaLat = d / Radius * 180 / Pi;
+        final double d = distance * 1000.0;
+        final double deltaLat = d / Radius * 180 / Pi;
         north += deltaLat * (north > 0 ? 1 : -1);
         south -= deltaLat * (south > 0 ? 1 : -1);
-        double northDelta = d / (Radius * Math.cos(Pi * north / 180.0)) * 180.0 / Pi;
-        double northWestLon = west - northDelta;
-        double northEastLon = east + northDelta;
-        double southDelta = d / (Radius * Math.cos(Pi * south / 180.0)) * 180.0 / Pi;
-        double southWestLon = west - southDelta;
-        double southEastLon = east + southDelta;
-        Double[][] boundingBox = new Double[5][2];
+        final double northDelta = d / (Radius * Math.cos(Pi * north / 180.0)) * 180.0 / Pi;
+        final double northWestLon = west - northDelta;
+        final double northEastLon = east + northDelta;
+        final double southDelta = d / (Radius * Math.cos(Pi * south / 180.0)) * 180.0 / Pi;
+        final double southWestLon = west - southDelta;
+        final double southEastLon = east + southDelta;
+        final Double[][] boundingBox = new Double[5][2];
         boundingBox[0][0] = northWestLon;
         boundingBox[0][1] = north;
         boundingBox[1][0] = northEastLon;
@@ -305,5 +328,9 @@ public class TheCSVParser {
         boundingBox[4][1] = north;
 
         return boundingBox;
+    }
+
+    public boolean isAutoClose() {
+        return this.configuration.isAutoClose();
     }
 }

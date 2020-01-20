@@ -13,7 +13,9 @@ import java.util.Set;
 public class MappedRecordJson extends JSONObject {
 
     private static final String S_Creator = "creator";
-    private static final String S_MD5HASH = "md5hash";
+    public static final String S_MD5HASH = "md5hash";
+    public static final String S_Index = "index";
+    public static final String S_UUID = "uuid";
     private static final String[] removeEntries = { "longitude", "latitude" };
     private static Logger logger = LoggerFactory.getLogger(MappedRecordJson.class);
 
@@ -21,18 +23,23 @@ public class MappedRecordJson extends JSONObject {
 
     }
 
-    public MappedRecordJson(MappedRecord record) {
+    public MappedRecordJson(final MappedRecord record) {
 
         super(new GsonBuilder().setPrettyPrinting().create().toJson(record));
 
         // per Jim's request to rename the index to uuid
-        Object uuid = this.get(ConfigurationHelper.FN_Index);
+        final Object uuid = this.get(ConfigurationHelper.FN_Index);
         this.remove(ConfigurationHelper.FN_Index);
-        this.put("uuid", uuid);
+        this.put(S_UUID, uuid);
+
+        // per Jim's request to rename the 'title' to 'name'
+        final Object name = this.get(ConfigurationHelper.FN_Title);
+        this.remove(ConfigurationHelper.FN_Title);
+        this.put("Name", name);
 
         // convert the description into key/value pair
-        Set<String> keys = record.getDescMap().keySet();
-        for (String key : keys) {
+        final Set<String> keys = record.getDescMap().keySet();
+        for (final String key : keys) {
             this.put(key, record.getDescMap().get(key));
         }
         this.remove("descMap");
@@ -42,10 +49,10 @@ public class MappedRecordJson extends JSONObject {
         clearUp();
 
         // make sure there is no null value
-        Iterator<String> keyIter = this.keys();
+        final Iterator<String> keyIter = this.keys();
         while (keyIter.hasNext()) {
-            String key = keyIter.next();
-            Object value = this.get(key);
+            final String key = keyIter.next();
+            final Object value = this.get(key);
             if (value instanceof String && value.toString().length() == 0) {
                 this.put(key, " ");
             }
@@ -54,15 +61,15 @@ public class MappedRecordJson extends JSONObject {
 
     private void clearUp() {
 
-        for (String key : removeEntries) {
+        for (final String key : removeEntries) {
             this.remove(key);
         }
     }
 
-    private void setWhere(String lat, String lon) {
+    private void setWhere(final String lat, final String lon) {
 
-        JSONObject where = new JSONObject();
-        JSONObject point = new JSONObject();
+        final JSONObject where = new JSONObject();
+        final JSONObject point = new JSONObject();
         point.put("pos", lat + " " + lon);
         where.put("Point", point);
         this.put("where", where);
@@ -73,14 +80,21 @@ public class MappedRecordJson extends JSONObject {
         return new AbstractMap.SimpleImmutableEntry(getCreator(), getPrimaryKey());
     }
 
+    // DynamoDB primary index is the title or the configuration name
     public String getCreator() {
 
         return (String) this.get(S_Creator);
     }
 
-    public String getPrimaryKey() {
+    public String getMD5Hash() {
 
         return (String) this.get(S_MD5HASH);
+    }
+
+    // DynamoDB secondary index is the index field of the record
+    public String getPrimaryKey() {
+
+        return (String) this.get(S_UUID);
     }
 
     public String getLatitude() {
