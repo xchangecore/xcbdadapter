@@ -1,7 +1,14 @@
 package com.spotonresponse.adapter.config;
 
+import com.amazonaws.auth.AWSStaticCredentialsProvider;
+import com.amazonaws.auth.BasicAWSCredentials;
+import com.amazonaws.client.builder.AwsClientBuilder;
+import com.amazonaws.services.dynamodbv2.AmazonDynamoDB;
+import com.amazonaws.services.dynamodbv2.AmazonDynamoDBClientBuilder;
+import com.amazonaws.services.dynamodbv2.document.DynamoDB;
 import com.google.cloud.datastore.*;
 import com.spotonresponse.adapter.repo.DynamoDBRepository;
+import com.spotonresponse.adapter.repo.unpw.ConfigurationFileAssociationDynamoDBRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
@@ -50,33 +57,33 @@ public class JsonAdapterConfiguration {
 
     @Bean
     public DynamoDBRepository dynamoDBRepository() {
-
-        try {
-            Datastore datastore = DatastoreOptions.getDefaultInstance().getService();
-            Query<Entity> query = Query.newEntityQueryBuilder()
-                    .setKind("Credentials")
-                    .setFilter(StructuredQuery.PropertyFilter.eq("UUID", DynamoDbUUID))
-                    .build();
-
-            QueryResults<Entity> results = datastore.run(query);
-            Entity entity = results.next();
-            aws_access_key_id = entity.getString("username");
-            aws_secret_access_key = entity.getString("password");
-            amazon_endpoint = entity.getString("Endpoint");
-            amazon_region = entity.getString("Region");
-            db_table_name = entity.getString("TableName");
-
-            logger.info("**** Got AWS Creds for table: " + db_table_name);
-
-
-        } catch (Exception ex) {
-            //logger.fine("Error: " + ex);
-
-        }
         DynamoDBRepository repo = new DynamoDBRepository();
 
-        repo.init(aws_access_key_id, aws_secret_access_key, amazon_endpoint, amazon_region, db_table_name);
+        repo.init(getDynamoDB(), db_table_name);
         return repo;
+    }
+
+    @Bean
+    public AmazonDynamoDB getDynamoDB(){
+        Datastore datastore = DatastoreOptions.getDefaultInstance().getService();
+        Query<Entity> query = Query.newEntityQueryBuilder()
+                .setKind("Credentials")
+                .setFilter(StructuredQuery.PropertyFilter.eq("UUID", DynamoDbUUID))
+                .build();
+
+        QueryResults<Entity> results = datastore.run(query);
+        Entity entity = results.next();
+        aws_access_key_id = entity.getString("username");
+        aws_secret_access_key = entity.getString("password");
+        amazon_endpoint = entity.getString("Endpoint");
+        amazon_region = entity.getString("Region");
+        db_table_name = entity.getString("TableName");
+
+        BasicAWSCredentials credentials = new BasicAWSCredentials(aws_access_key_id, aws_secret_access_key);
+
+        return AmazonDynamoDBClientBuilder.standard().withCredentials(new AWSStaticCredentialsProvider(
+                    credentials)).withEndpointConfiguration(new AwsClientBuilder.EndpointConfiguration(amazon_endpoint,
+                    amazon_region)).build();
     }
 
     @Bean(name = "taskExecutor")

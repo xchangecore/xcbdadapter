@@ -9,6 +9,9 @@ import com.amazonaws.services.dynamodbv2.document.*;
 import com.amazonaws.services.dynamodbv2.document.spec.DeleteItemSpec;
 import com.amazonaws.services.dynamodbv2.document.spec.QuerySpec;
 import com.amazonaws.services.dynamodbv2.document.utils.ValueMap;
+import com.amazonaws.services.dynamodbv2.model.CreateTableRequest;
+import com.amazonaws.services.dynamodbv2.model.KeySchemaElement;
+import com.amazonaws.services.dynamodbv2.model.KeyType;
 import com.spotonresponse.adapter.model.MappedRecordJson;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -22,35 +25,24 @@ public class DynamoDBRepository {
     public static final String S_Title = "title";
     private static final Logger logger = LogManager.getLogger(DynamoDBRepository.class);
 
-    private static DynamoDB dynamoDBClient = null;
+    private  DynamoDB dynamoDBClient = null;
     private static Table table = null;
 
     public DynamoDBRepository() { }
 
-    public void init(String aws_access_key_id, String aws_secret_access_key, String amazon_endpoint, String amazon_region, String dynamoDBTableName) {
+    public void init(AmazonDynamoDB dynamoDB, String dynamoDBTableName) {
 
         logger.info("Init: dynamoDBRepository: ... start ...");
-        if (aws_access_key_id == null || aws_secret_access_key == null || amazon_endpoint == null ||
-            amazon_region == null || dynamoDBTableName == null) {
-            return;
-        }
-
-        BasicAWSCredentials credentials = new BasicAWSCredentials(aws_access_key_id, aws_secret_access_key);
 
         try {
-            AmazonDynamoDB amazonDynamoDB = AmazonDynamoDBClientBuilder.standard().withCredentials(new AWSStaticCredentialsProvider(
-                credentials)).withEndpointConfiguration(new AwsClientBuilder.EndpointConfiguration(amazon_endpoint,
-                                                                                                   amazon_region)).build();
-
-            logger.debug("Setting up DynamoDB client: Region: [{}], Endpoint: [{}]", amazon_region, amazon_endpoint);
-            dynamoDBClient = new DynamoDB(amazonDynamoDB);
-
+            dynamoDBClient = new DynamoDB(dynamoDB);
             logger.debug("Setting up DynamoDB table: [{}]", dynamoDBTableName);
             table = dynamoDBClient.getTable(dynamoDBTableName);
         } catch (Throwable e) {
             logger.error("DynamoDBRepository.init: failed: " + e.getMessage());
         }
     }
+
 
     public JSONArray query(String title) {
 

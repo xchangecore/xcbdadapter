@@ -1,6 +1,7 @@
 package com.spotonresponse.adapter.services.unpw;
 
 import com.spotonresponse.adapter.model.unpw.ConfigurationFileAssociation;
+import com.spotonresponse.adapter.repo.unpw.ConfigurationFileAssociationDynamoDBRepository;
 import com.spotonresponse.adapter.repo.unpw.ConfigurationFileAssociationRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -8,7 +9,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class ConfigurationFileAssociationValidator {
     @Autowired
-    private ConfigurationFileAssociationRepository configurationFileAssociationRepository;
+    private ConfigurationFileAssociationDynamoDBRepository configurationFileAssociationRepository;
 
     public ValidationErrors validate(ConfigurationFileAssociation configurationFileAssociation){
         final ValidationErrors validationErrors = new ValidationErrors();

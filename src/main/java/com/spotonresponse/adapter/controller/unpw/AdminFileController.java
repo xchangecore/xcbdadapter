@@ -1,26 +1,20 @@
 package com.spotonresponse.adapter.controller.unpw;
 
 import com.spotonresponse.adapter.controller.FileController;
-import com.spotonresponse.adapter.controller.UploadFileResponse;
 import com.spotonresponse.adapter.model.Configuration;
 import com.spotonresponse.adapter.model.unpw.ConfigurationFileAssociation;
-import com.spotonresponse.adapter.process.ConfigFileParser;
-import com.spotonresponse.adapter.repo.unpw.ConfigurationFileAssociationRepository;
 import com.spotonresponse.adapter.repo.ConfigurationRepository;
+import com.spotonresponse.adapter.repo.unpw.ConfigurationFileAssociationDynamoDBRepository;
 import com.spotonresponse.adapter.services.FileStorageService;
-import com.spotonresponse.adapter.services.JsonScheduler;
 import com.spotonresponse.adapter.services.unpw.ConfigurationFileAssociationValidator;
 import com.spotonresponse.adapter.services.unpw.ValidationErrors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.util.List;
-
-import static com.spotonresponse.adapter.model.ConfigurationHelper.logger;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("api/unpw/")
@@ -31,7 +25,7 @@ public class AdminFileController {
     private ConfigurationFileAssociationValidator validator;
 
     @Autowired
-    private ConfigurationFileAssociationRepository configFileAssocRepository;
+    private ConfigurationFileAssociationDynamoDBRepository configFileAssocRepository;
 
     @Autowired
     private FileController fileController;
@@ -45,13 +39,26 @@ public class AdminFileController {
     @Autowired
     private ConfigurationRepository configurationRepository;
 
+    @GetMapping("existsByUsername")
+    public boolean existsByUsername(@RequestParam  String username){
+        return configFileAssocRepository.existsByUsername(username);
+    }
+
+    @GetMapping("configurations")
+    public List<String> getAllConfigurations(){
+        return configurationRepository.findAll().stream()
+                .map(Configuration::getId)
+                .collect(Collectors.toList());
+    }
+
+
     @PostMapping("uploadConfig")
     public ResponseEntity<?> uploadConfigFile(@RequestParam  String username,
                                               @RequestParam  String password,
-                                              @RequestParam  MultipartFile configFile){
+                                              @RequestParam  String configName){
 
         final ConfigurationFileAssociation configFileAssoc =
-                new ConfigurationFileAssociation(username, password, configFile.getName());
+                new ConfigurationFileAssociation(username, password, configName);
 
 
         // validate the user input and return 400 error if the validation failed.
@@ -64,33 +71,9 @@ public class AdminFileController {
         configFileAssoc.setPassword(passwordEncoder.encode(configFileAssoc.getPassword()));
 
 
-        // persist the config file association.
+        // persist the config file association
         configFileAssocRepository.save(configFileAssoc);
 
-
-        String fileName = fileStorageService.storeFile(configFile);
-        ConfigFileParser parser;
-        try {
-            logger.info("Upload file: {} ...", fileName);
-            parser = new ConfigFileParser(fileName, configFile.getInputStream());
-            List<Configuration> configurationList = parser.getConfigurationList();
-            for (Configuration configuration : configurationList) {
-                // set the username/password for each config instance found.
-                configuration.setUsername(username);
-                configuration.setPassword(configFileAssoc.getPassword());
-
-                configurationRepository.save(configuration);
-                JsonScheduler.getInstance().setSchedule(configuration);
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        String fileDownloadUri = ServletUriComponentsBuilder.fromCurrentContextPath().path("/downloadFile/")
-                .path(fileName).toUriString();
-
-        final UploadFileResponse response = new UploadFileResponse(fileName, fileDownloadUri, configFile.getContentType(), configFile.getSize());
-
-        return ResponseEntity.ok(response);
+        return ResponseEntity.ok("Configuration was successfully saved.");
     }
 }

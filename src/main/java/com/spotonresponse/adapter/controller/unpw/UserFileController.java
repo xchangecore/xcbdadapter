@@ -1,25 +1,24 @@
 package com.spotonresponse.adapter.controller.unpw;
 
-import com.spotonresponse.adapter.model.Configuration;
-import com.spotonresponse.adapter.model.MappedRecordJson;
-import com.spotonresponse.adapter.process.CSVParser;
+import com.spotonresponse.adapter.controller.FileController;
+import com.spotonresponse.adapter.model.unpw.ConfigurationFileAssociation;
 import com.spotonresponse.adapter.repo.ConfigurationRepository;
 import com.spotonresponse.adapter.repo.DynamoDBRepository;
-import com.spotonresponse.adapter.security.unpw.ConfigUserDetailsService;
+import com.spotonresponse.adapter.repo.unpw.ConfigurationFileAssociationDynamoDBRepository;
+import com.spotonresponse.adapter.repo.unpw.ConfigurationFileAssociationRepository;
 import com.spotonresponse.adapter.security.unpw.JwtService;
-import com.spotonresponse.adapter.services.CSVToJSON;
 import lombok.val;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.security.Principal;
-import java.util.List;
-
-import static com.spotonresponse.adapter.model.ConfigurationHelper.logger;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:4200", allowCredentials = "true")
@@ -28,16 +27,16 @@ public class UserFileController {
     private AuthenticationManager authenticationManager;
 
     @Autowired
-    private ConfigUserDetailsService configUserDetailsService;
-
-    @Autowired
     private ConfigurationRepository configurationRepository;
 
     @Autowired
     private JwtService jwtService;
 
     @Autowired
-    private DynamoDBRepository dynamoDBRepository;
+    private ConfigurationFileAssociationDynamoDBRepository configurationFileAssociationRepository;
+
+    @Autowired
+    private FileController fileController;
 
     @PostMapping("/api/unpw/authenticate")
     public ResponseEntity<String> authenticate(@RequestParam String username,
@@ -55,27 +54,13 @@ public class UserFileController {
     }
 
     @PostMapping("/api/unpw/user/uploadCSV")
-    public int uploadCSVFile(@RequestParam("csvFile") MultipartFile csvFile, Principal principal){
-        List<Configuration> configurationList = configurationRepository.findByUsername(principal.getName());
-        int csvRecordSize = 0;
-        try{
-            for(Configuration configuration : configurationList){
-                CSVParser parser = new CSVParser(configuration, CSVToJSON.parse(csvFile));
-                List<MappedRecordJson> recordList = parser.getJsonRecordList();
+    public long uploadCSVFile(@RequestParam("csvFile") MultipartFile csvFile, Principal principal) {
+        ConfigurationFileAssociation configurationFileAssociation =
+                configurationFileAssociationRepository.findById(principal.getName());
 
-                if(recordList.size() > csvRecordSize){
-                    csvRecordSize = recordList.size();
-                }
 
-                logger.info("record count: {}", recordList.size());
-                dynamoDBRepository.removeByCreator(parser.getId());
-                dynamoDBRepository.createAllEntries(recordList);
-                logger.info("... done ...");
-            }
-        } catch (Exception e){
-            logger.error(e.getMessage());
-        }
-
-        return csvRecordSize;
+        return fileController
+                .uploadCSVFile(csvFile, configurationFileAssociation.getConfigName())
+                .getSize();
     }
 }

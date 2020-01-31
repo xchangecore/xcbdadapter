@@ -89,16 +89,17 @@ public class FileController {
             // retrieve the configuration
             Optional<Configuration> configuration = configurationRepository.findById(csvConfiugrationName);
             CSVParser parser = new CSVParser(configuration.get(), CSVToJSON.parse(file));
+
             List<MappedRecordJson> recordList = parser.getJsonRecordList();
             logger.info("record count: {}", recordList.size());
             dynamoDBRepository.removeByCreator(parser.getId());
             dynamoDBRepository.createAllEntries(recordList);
             logger.info("... done ...");
+            return new UploadFileResponse(csvConfiugrationName, "xyz", "csv", recordList.size());
         } catch (Exception e) {
             // TODO Error Handling
             e.printStackTrace();
         }
-
         // parse the map with configuration
         return new UploadFileResponse(csvConfiugrationName, "xyz", "csv", 0);
     }
