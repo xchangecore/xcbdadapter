@@ -69,7 +69,7 @@ public class JsonController {
     @RequestMapping(value = "/query", produces = "application/json")
     public QueryResult query(@RequestParam(value = "config", defaultValue = "xcore") String creator) {
 
-        JSONArray resultArray = dynamoDBRepository.query(creator);
+        JSONArray resultArray = dynamoDBRepository.queryArray(creator);
 
         return new QueryResult(creator, resultArray.length(), resultArray);
     }

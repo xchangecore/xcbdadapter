@@ -38,15 +38,10 @@ public class JsonAdapterConfiguration {
     @Value("${DynamoDbUUID}")
     private String DynamoDbUUID;
 
-    @Value("${aws.access.key.id}")
     private String aws_access_key_id;
-    @Value("${aws.secret.access.key}")
     private String aws_secret_access_key;
-    @Value("${amazon.endpoint}")
     private String amazon_endpoint;
-    @Value("${amazon.region}")
     private String amazon_region;
-    @Value("${db.table.name}")
     private String db_table_name;
 
     @Bean

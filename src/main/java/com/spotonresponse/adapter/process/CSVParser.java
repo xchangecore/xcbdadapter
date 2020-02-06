@@ -11,6 +11,7 @@ import org.slf4j.LoggerFactory;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 public class CSVParser {
 
@@ -23,8 +24,11 @@ public class CSVParser {
     private static Logger logger = LoggerFactory.getLogger(CSVParser.class);
 
     private TheCSVParser parser = null;
+    private boolean isAutoClose = false;
 
     public CSVParser(Configuration configuration, List<Map<String, Object>> rows) {
+
+        isAutoClose = configuration.isAutoClose();
 
         List<Map<String, String>> listOfRow = new ArrayList<Map<String, String>>();
         for (Map<String, Object> row : rows) {
@@ -41,8 +45,26 @@ public class CSVParser {
         return parser.getRecordList();
     }
 
+    public List<MappedRecord> getNotMatchedList() {
+        return parser.getNotMatchedList();
+    }
+
     public List<MappedRecordJson> getJsonRecordList() {
 
         return parser.getJsonRecordList();
+    }
+    
+    public Map<String, MappedRecordJson> getJsonRecordMap() {
+
+        return parser.getJsonRecordMap();
+    }
+
+    public Set<String> getNotMatchedKeSet() {
+        
+        return parser.getNotMatchedKeSet();
+    }
+
+    public boolean isAutoClose() {
+        return isAutoClose;
     }
 }

@@ -1,10 +1,10 @@
 package com.spotonresponse.adapter.controller;
 
+import com.spotonresponse.adapter.model.MappedRecordJson;
 import com.spotonresponse.adapter.services.CSVToJSON;
 import com.spotonresponse.adapter.services.FileStorageService;
 import com.spotonresponse.adapter.services.JsonScheduler;
 import com.spotonresponse.adapter.model.Configuration;
-import com.spotonresponse.adapter.model.MappedRecordJson;
 import com.spotonresponse.adapter.process.CSVParser;
 import com.spotonresponse.adapter.process.ConfigFileParser;
 import com.spotonresponse.adapter.repo.ConfigurationRepository;
@@ -18,7 +18,6 @@ import org.springframework.core.io.Resource;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -103,7 +102,6 @@ public class FileController {
         // parse the map with configuration
         return new UploadFileResponse(csvConfiugrationName, "xyz", "csv", 0);
     }
-
 
     @PostMapping("/uploadMultiCSVFile")
     public List<UploadFileResponse> uploadMultipleCSVFiles(@RequestParam("files") MultipartFile[] files,
