@@ -1,6 +1,5 @@
 package com.spotonresponse.adapter.controller;
 
-import com.spotonresponse.adapter.model.MappedRecordJson;
 import com.spotonresponse.adapter.services.CSVToJSON;
 import com.spotonresponse.adapter.services.FileStorageService;
 import com.spotonresponse.adapter.services.JsonScheduler;
@@ -88,24 +87,20 @@ public class FileController {
             // retrieve the configuration
             Optional<Configuration> configuration = configurationRepository.findById(csvConfiugrationName);
             CSVParser parser = new CSVParser(configuration.get(), CSVToJSON.parse(file));
-
-            List<MappedRecordJson> recordList = parser.getJsonRecordList();
-            logger.info("record count: {}", recordList.size());
-            dynamoDBRepository.removeByCreator(parser.getId());
-            dynamoDBRepository.createAllEntries(recordList);
-            logger.info("... done ...");
-            return new UploadFileResponse(csvConfiugrationName, "xyz", "csv", recordList.size());
+            dynamoDBRepository.updateEntries(parser.getNotMatchedKeSet(), parser.getJsonRecordMap(),
+                    parser.isAutoClose(), parser.getId());
         } catch (Exception e) {
             // TODO Error Handling
             e.printStackTrace();
         }
+
         // parse the map with configuration
         return new UploadFileResponse(csvConfiugrationName, "xyz", "csv", 0);
     }
 
     @PostMapping("/uploadMultiCSVFile")
     public List<UploadFileResponse> uploadMultipleCSVFiles(@RequestParam("files") MultipartFile[] files,
-            @RequestParam("config_name") String csvConfiugrationName) {
+                                                           @RequestParam("config_name") String csvConfiugrationName) {
 
         return Arrays.asList(files).stream().map(file -> uploadCSVFile(file, csvConfiugrationName))
                 .collect(Collectors.toList());
