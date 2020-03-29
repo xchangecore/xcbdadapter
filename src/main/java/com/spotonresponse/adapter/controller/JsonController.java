@@ -1,6 +1,7 @@
 package com.spotonresponse.adapter.controller;
 
 import java.util.List;
+import java.util.Optional;
 
 import com.google.gson.Gson;
 import com.spotonresponse.adapter.model.Configuration;
@@ -8,6 +9,7 @@ import com.spotonresponse.adapter.model.QueryResult;
 import com.spotonresponse.adapter.repo.ConfigurationRepository;
 import com.spotonresponse.adapter.repo.DynamoDBRepository;
 
+import com.spotonresponse.adapter.services.JsonScheduler;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -51,8 +53,13 @@ public class JsonController {
     @GetMapping(path = "/deleteConfiguration/{name}", produces = "application/json")
     public String deleteConfiguration(@PathVariable String name) {
 
-        configurationRepository.deleteById(name);
-
+        Optional<Configuration> configuration = configurationRepository.findById(name);
+        if (configuration.isPresent()) {
+            if (configuration.get().getJson_ds() != null) {
+                JsonScheduler.getInstance().removeSchedule(name);
+            }
+            configurationRepository.deleteById(name);
+        }
         JSONObject status = new JSONObject();
         status.put("Configuration", name);
         status.put("Remove", configurationRepository.findById(name).isPresent() ? "Failure" : "Success");

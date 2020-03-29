@@ -13,7 +13,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-public class CSVParser {
+public class CSVParser implements Parser {
 
     public static final String S_TokenSeparator = ":";
     public static final String PatternPrefix = "(?i:.*";
@@ -59,9 +59,9 @@ public class CSVParser {
         return parser.getJsonRecordMap();
     }
 
-    public Set<String> getNotMatchedKeSet() {
+    public Set<String> getNotMatchedKeySet() {
         
-        return parser.getNotMatchedKeSet();
+        return parser.getNotMatchedKeySet();
     }
 
     public boolean isAutoClose() {

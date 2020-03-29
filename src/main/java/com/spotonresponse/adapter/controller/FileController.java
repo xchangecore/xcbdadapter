@@ -8,7 +8,6 @@ import com.spotonresponse.adapter.process.CSVParser;
 import com.spotonresponse.adapter.process.ConfigFileParser;
 import com.spotonresponse.adapter.repo.ConfigurationRepository;
 import com.spotonresponse.adapter.repo.DynamoDBRepository;
-import com.spotonresponse.adapter.controller.UploadFileResponse;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -74,7 +73,7 @@ public class FileController {
     @PostMapping("/uploadMultiConfig")
     public List<UploadFileResponse> uploadMultipleFiles(@RequestParam("files") MultipartFile[] files) {
         for (MultipartFile file : files) {
-            logger.error("Uploading file: " + file.getName());
+            logger.info("Uploading file: " + file.getName());
         }
         return Arrays.asList(files).stream().map(file -> uploadFile(file)).collect(Collectors.toList());
     }
@@ -87,7 +86,7 @@ public class FileController {
             // retrieve the configuration
             Optional<Configuration> configuration = configurationRepository.findById(csvConfiugrationName);
             CSVParser parser = new CSVParser(configuration.get(), CSVToJSON.parse(file));
-            dynamoDBRepository.updateEntries(parser.getNotMatchedKeSet(), parser.getJsonRecordMap(),
+            dynamoDBRepository.updateEntries(parser.getNotMatchedKeySet(), parser.getJsonRecordMap(),
                     parser.isAutoClose(), parser.getId());
         } catch (Exception e) {
             // TODO Error Handling

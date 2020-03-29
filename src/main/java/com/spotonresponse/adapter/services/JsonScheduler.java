@@ -31,17 +31,23 @@ public class JsonScheduler {
         return _instance;
     }
 
+    public void removeSchedule(String name) {
+
+        ScheduledFuture schedule = scheduleMap.remove(name);
+        if (schedule != null) {
+
+            logger.info("Cancel schedule for {}", name);
+            schedule.cancel(true);
+        }
+    }
+
     public void setSchedule(Configuration configuration) {
 
         if (configuration == null || configuration.getJson_ds() == null)
             return;
         String name = configuration.getId();
         logger.info("setSchedule: name: [{}}]", name);
-        ScheduledFuture schedule = scheduleMap.remove(name);
-        if (schedule != null) {
-            logger.info("Cancel schedule for {}", name);
-            schedule.cancel(true);
-        }
+        removeSchedule(name);
 
         if (name.startsWith("test.")) {
             Date currentTimestamp = new Date();

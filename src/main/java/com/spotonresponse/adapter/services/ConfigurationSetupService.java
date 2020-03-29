@@ -42,7 +42,9 @@ public class ConfigurationSetupService implements ApplicationListener<Applicatio
         JsonScheduler.getInstance().setTaskScheduler(taskScheduler);
         List<Configuration> configurationList = configurationRepository.findAll();
         for (Configuration configuration : configurationList) {
-            JsonScheduler.getInstance().setSchedule(configuration);
+            if (configuration.getJson_ds() != null) {
+                JsonScheduler.getInstance().setSchedule(configuration);
+            }
         }
         logger.info("ConfigurationSetupService: ... done ...");
 

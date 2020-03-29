@@ -1,7 +1,6 @@
 package com.spotonresponse.adapter.services;
 
 import com.spotonresponse.adapter.model.Configuration;
-import com.spotonresponse.adapter.model.MappedRecordJson;
 import com.spotonresponse.adapter.process.JsonFeedParser;
 import com.spotonresponse.adapter.repo.DynamoDBRepository;
 import org.slf4j.Logger;
@@ -9,7 +8,6 @@ import org.slf4j.LoggerFactory;
 import org.slf4j.MDC;
 
 import java.util.Date;
-import java.util.List;
 
 public class JSONPollerTask implements Runnable {
 
@@ -37,12 +35,11 @@ public class JSONPollerTask implements Runnable {
 
         String content = new UrlReader(configuration.getJson_ds()).getContent();
 
-        // use the input stream to generate records
-        List<MappedRecordJson> recordList = new JsonFeedParser(this.configuration, content).getJsonRecordList();
-
-        logger.info("record count: {}", recordList.size());
-        dynamoDBRepository.removeByCreator(configuration.getId());
-        dynamoDBRepository.createAllEntries(recordList);
-        logger.info("... done ...");
+        // the parsed result
+        JsonFeedParser parser = new JsonFeedParser(this.configuration, content);
+        dynamoDBRepository.updateEntries(parser.getNotMatchedKeySet(),
+            parser.getJsonRecordMap(),
+            parser.isAutoClose(),
+            parser.getId());
     }
 }

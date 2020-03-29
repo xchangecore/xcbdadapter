@@ -1,7 +1,6 @@
 package com.spotonresponse.adapter.process;
 
 import com.spotonresponse.adapter.model.Configuration;
-import com.spotonresponse.adapter.model.MappedRecord;
 import com.spotonresponse.adapter.model.MappedRecordJson;
 import com.spotonresponse.adapter.model.Util;
 import org.json.JSONArray;
@@ -14,7 +13,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-public class JsonFeedParser {
+public class JsonFeedParser implements Parser {
 
     public static final String S_Features = "features";
     public static final String S_Properties = "properties";
@@ -22,11 +21,15 @@ public class JsonFeedParser {
     public static final String S_coordinates = "coordinates";
 
     private static Logger logger = LoggerFactory.getLogger(JsonFeedParser.class);
+
     private TheCSVParser parser = null;
+    private boolean isAutoClose = false;
 
     public JsonFeedParser(Configuration configuration, String contentText) {
 
         logger.info("JsonFeedParser: Configuration: {}", configuration.getId());
+
+        isAutoClose = configuration.isAutoClose();
 
         JSONObject jsonObject = new JSONObject(contentText);
 
@@ -60,6 +63,31 @@ public class JsonFeedParser {
     }
 
     public List<MappedRecordJson> getJsonRecordList() {
+
         return parser.getJsonRecordList();
+    }
+
+    @Override
+    public boolean isAutoClose() {
+
+        return this.isAutoClose;
+    }
+
+    @Override
+    public String getId() {
+
+        return parser.getId();
+    }
+
+    @Override
+    public Map<String, MappedRecordJson> getJsonRecordMap() {
+
+        return parser.getJsonRecordMap();
+    }
+
+    @Override
+    public Set<String> getNotMatchedKeySet() {
+
+        return parser.getNotMatchedKeySet();
     }
 }
