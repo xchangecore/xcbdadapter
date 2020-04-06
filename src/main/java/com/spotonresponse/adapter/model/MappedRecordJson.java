@@ -12,7 +12,8 @@ import java.util.Set;
 
 public class MappedRecordJson extends JSONObject {
 
-    private static final String S_Creator = "creator";
+    public static final String S_Creator = "creator";
+    public static final String S_Content = "content";
     public static final String S_MD5HASH = "md5hash";
     public static final String S_Index = "index";
     public static final String S_UUID = "uuid";

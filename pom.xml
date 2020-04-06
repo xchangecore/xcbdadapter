@@ -10,7 +10,8 @@
     </parent>
     <groupId>com.spotonresponse</groupId>
     <artifactId>xcbdadapter</artifactId>
-    <version>1.0.1</version>
+    <!-- branch feature/autoclose_jsonfeed -->
+    <version>2.0.4</version>
     <name>adapter</name>
     <description>SpotOnReponse XCBD Adapter</description>
     <properties>

@@ -29,6 +29,7 @@ import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
@@ -81,20 +82,30 @@ public class FileController {
     @PostMapping("/uploadCSVFile")
     public UploadFileResponse uploadCSVFile(@RequestParam("file") MultipartFile file, String csvConfiugrationName) {
 
-        try {
-            // convert MultipartFile into Map
-            // retrieve the configuration
-            Optional<Configuration> configuration = configurationRepository.findById(csvConfiugrationName);
-            CSVParser parser = new CSVParser(configuration.get(), CSVToJSON.parse(file));
-            dynamoDBRepository.updateEntries(parser.getNotMatchedKeySet(), parser.getJsonRecordMap(),
-                    parser.isAutoClose(), parser.getId());
-        } catch (Exception e) {
-            // TODO Error Handling
-            e.printStackTrace();
+        // convert MultipartFile into Map then retrieve the configuration
+        Optional<Configuration> configuration = configurationRepository.findById(csvConfiugrationName);
+        int rowCount = 0;
+        if (configuration.isPresent()) {
+            List<Map<String, Object>> rows = CSVToJSON.parse(file);
+            rowCount = rows.size();
+            try {
+                if (rowCount == 1) {
+                    // Only update the record instead of parsing the csv
+                    dynamoDBRepository.update(configuration.get().getId(), rows.get(0));
+                } else {
+                    CSVParser parser = new CSVParser(configuration.get(), rows);
+                    dynamoDBRepository.updateEntries(parser.getNotMatchedKeySet(),
+                        parser.getJsonRecordMap(),
+                        parser.isAutoClose(),
+                        parser.getId());
+                }
+            } catch (Exception e) {
+                // TODO Error Handling
+                e.printStackTrace();
+            }
         }
-
         // parse the map with configuration
-        return new UploadFileResponse(csvConfiugrationName, "xyz", "csv", 0);
+        return new UploadFileResponse(csvConfiugrationName, "xyz", "csv", rowCount);
     }
 
     @PostMapping("/uploadMultiCSVFile")
