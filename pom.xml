@@ -10,7 +10,7 @@
     </parent>
     <groupId>com.spotonresponse</groupId>
     <artifactId>xcbdadapter</artifactId>
-    <version>2.0.3</version>
+    <version>2.0.4</version>
     <name>adapter</name>
     <description>SpotOnReponse XCBD Adapter</description>
     <properties>

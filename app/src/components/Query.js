@@ -1,5 +1,5 @@
 import React from "react";
-import { Component } from "react";
+import {Component} from "react";
 import axios from "axios";
 import "./FileUpload.css";
 import SelectBox from "../features/select-box";
@@ -16,7 +16,7 @@ class Query extends Component {
     }
 
     onSelectConfiguration(name) {
-        this.setState({ configurationName: name });
+        this.setState({configurationName: name});
     }
 
     getConfigurationName() {
@@ -30,27 +30,43 @@ class Query extends Component {
                 };
             }
             //console.log("listConfigurationName: ", list);
-            this.setState({ listConfigurationName: list });
+            this.setState({listConfigurationName: list});
         });
     }
 
     render() {
         return (
-            <div className='container'>
-                <div className='row'>
-                    <div className='col-md-6'>
-                        <div>
-                            {this.state.listConfigurationName.length === 0 ? null : (
-                                <div style={{ margin: "16px", position: "relative" }}>
-                                    <h3>Configuration Name</h3>
-                                    <SelectBox items={this.state.listConfigurationName} />
-                                </div>
-                            )}
-                        </div>
-                    </div>
-                </div>
-            </div>
-        )
+            < div
+        className = 'container' >
+            < div
+        className = 'row' >
+            < div
+        className = 'col-md-6' >
+            < div >
+            {
+                this.state.listConfigurationName.length === 0 ? null : (
+                    < div style = {
+        {
+            margin: "16px", position
+        :
+            "relative"
+        }
+    }>
+    <
+        h3 > Configuration
+        Name < /h3>
+        < SelectBox
+        items = {this.state.listConfigurationName}
+        />
+        < /div>
+    )
+    }
+    <
+        /div>
+        < /div>
+        < /div>
+        < /div>
+    )
     }
 }
 

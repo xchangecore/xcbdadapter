@@ -1,6 +1,6 @@
 import React from "react";
-import { Component } from "react";
-import { Progress } from "reactstrap";
+import {Component} from "react";
+import {Progress} from "reactstrap";
 import axios from "axios";
 import "./FileUpload.css";
 import SelectBox from "../features/select-box";
@@ -24,7 +24,7 @@ class FileUpload extends Component {
             this.getConfiguration(name);
         } else {
             console.log("onSelectConfig: Config: ", name);
-            this.setState({ csvConfigurationName: name });
+            this.setState({csvConfigurationName: name});
         }
     }
 
@@ -41,9 +41,9 @@ class FileUpload extends Component {
         axios.get(url).then(res => {
             var list = [];
             for (var i = 0; i < res.data.length; i++) {
-                list[i] = { value: res.data[i], id: i + 1 };
+                list[i] = {value: res.data[i], id: i + 1};
             }
-            this.setState({ listConfigurationName: list });
+            this.setState({listConfigurationName: list});
         });
     }
 
@@ -52,7 +52,7 @@ class FileUpload extends Component {
         if (!this.state.isConfig) {
             this.getCSVConfigurationName();
         } else {
-            this.setState({ listConfigurationName: [] });
+            this.setState({listConfigurationName: []});
         }
     }
 
@@ -99,61 +99,114 @@ class FileUpload extends Component {
 
     render() {
         return (
-            <div className='container'>
-                <div className='row'>
-                    <div className='col-md-6'>
-                        <form method='post' action='#' id='#'>
-                            <div className='form-group files'>
-                                <label>Upload {this.state.isConfig ? "Configuration" : "CSV"} File(s)</label>
-                                <input type='file' className='form-control' multiple onChange={this.onChangeHandler} />
-                            </div>
-                        </form>
-                        <div className='form-group'>
-                            <Progress max='100' color='success' value={this.state.loaded}>
-                                {Math.round(this.state.loaded, 2)}%
-                            </Progress>
-                        </div>
-                        <button type='button' className='btn btn-success btn-block' onClick={this.onClickHandler}>
-                            Upload
-                        </button>
-                    </div>
-                </div>
-                <div>
-                    {this.state.isConfig ? (
-                        <div className="row">
-                            <div className='col-md-6'>
-                                <div>
-                                    {this.state.listConfigurationName.length === 0 ? null : (
-                                        <div style={{ margin: "16px", position: "relative" }}>
-                                            <h3>Configuration Name</h3>
-                                            <SelectBox items={this.state.listConfigurationName}
-                                                onSelectItem={this.onSelectConfig}
-                                            />
-                                        </div>
-                                    )}
-                                </div>
-                            </div>
-                        </div>
-                    ) : (
-                            <div className='row'>
-                                <div className='col-md-6'>
-                                    <div>
-                                        {this.state.listConfigurationName.length === 0 ? null : (
-                                            <div style={{ margin: "16px", position: "relative" }}>
-                                                <h3>CSV Configuration</h3>
-                                                <SelectBox
-                                                    items={this.state.listConfigurationName}
-                                                    onSelectItem={this.onSelectConfig}
-                                                />
-                                            </div>
-                                        )}
-                                    </div>
-                                </div>
-                            </div>
-                        )}
-                </div>
-            </div>
-        );
+            < div
+        className = 'container' >
+            < div
+        className = 'row' >
+            < div
+        className = 'col-md-6' >
+            < form
+        method = 'post'
+        action = '#'
+        id = '#' >
+            < div
+        className = 'form-group files' >
+            < label > Upload
+        {
+            this.state.isConfig ? "Configuration" : "CSV"
+        }
+        File(s) < /label>
+        < input
+        type = 'file'
+        className = 'form-control'
+        multiple
+        onChange = {this.onChangeHandler}
+        />
+        < /div>
+        < /form>
+        < div
+        className = 'form-group' >
+            < Progress
+        max = '100'
+        color = 'success'
+        value = {this.state.loaded} >
+            {Math.round(this.state.loaded, 2)} %
+            < /Progress>
+            < /div>
+            < button
+        type = 'button'
+        className = 'btn btn-success btn-block'
+        onClick = {this.onClickHandler} >
+            Upload
+            < /button>
+            < /div>
+            < /div>
+            < div >
+            {
+                this.state.isConfig ? (
+                    < div className = "row" >
+                    < div className = 'col-md-6' >
+                < div >
+                {
+                    this.state.listConfigurationName.length === 0 ? null : (
+                        < div style = {
+        {
+            margin: "16px", position
+        :
+            "relative"
+        }
+    }>
+    <
+        h3 > Configuration
+        Name < /h3>
+        < SelectBox
+        items = {this.state.listConfigurationName}
+        onSelectItem = {this.onSelectConfig}
+        />
+        < /div>
+    )
+    }
+    <
+        /div>
+        < /div>
+        < /div>
+    ) :
+        (
+        < div
+        className = 'row' >
+            < div
+        className = 'col-md-6' >
+            < div >
+            {
+                this.state.listConfigurationName.length === 0 ? null : (
+                    < div style = {
+        {
+            margin: "16px", position
+        :
+            "relative"
+        }
+    }>
+    <
+        h3 > CSV
+        Configuration < /h3>
+        < SelectBox
+        items = {this.state.listConfigurationName}
+        onSelectItem = {this.onSelectConfig}
+        />
+        < /div>
+    )
+    }
+    <
+        /div>
+        < /div>
+        < /div>
+    )
+    }
+    <
+        /div>
+        < /div>
+    )
+        ;
     }
 }
 
