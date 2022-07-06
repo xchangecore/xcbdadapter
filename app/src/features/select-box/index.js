@@ -55,9 +55,7 @@ class SelectBox extends React.Component {
             this.state.items.map(item => (
                 < div
             key = {item.id}
-            onClick = {()
-        =>
-            this.selectItem(item)
+            onClick = {() => this.selectItem(item)
         }
             className = {this.state.selectedItem === item ? "selected" : ""}
                 >

@@ -12,12 +12,12 @@ function App() {
     < Tabs >
     < div
     label = "Configuration File Upload" >
-        < FileUpload / >
+        < FileUpload />
         < /div>
         < div
     label = "CSV File Upload" >
         < FileUpload
-    type = "csv" / >
+    type = "csv" />
         < /div>
         < div
     label = "Query" >

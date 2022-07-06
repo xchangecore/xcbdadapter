@@ -1,24 +1,26 @@
 package com.spotonresponse.adapter.repo;
 
-import com.amazonaws.auth.AWSStaticCredentialsProvider;
-import com.amazonaws.auth.BasicAWSCredentials;
-import com.amazonaws.client.builder.AwsClientBuilder;
 import com.amazonaws.services.dynamodbv2.AmazonDynamoDB;
-import com.amazonaws.services.dynamodbv2.AmazonDynamoDBClientBuilder;
-import com.amazonaws.services.dynamodbv2.document.*;
+import com.amazonaws.services.dynamodbv2.document.DynamoDB;
+import com.amazonaws.services.dynamodbv2.document.Item;
+import com.amazonaws.services.dynamodbv2.document.ItemCollection;
+import com.amazonaws.services.dynamodbv2.document.PrimaryKey;
+import com.amazonaws.services.dynamodbv2.document.QueryOutcome;
+import com.amazonaws.services.dynamodbv2.document.Table;
+import com.amazonaws.services.dynamodbv2.document.internal.IteratorSupport;
 import com.amazonaws.services.dynamodbv2.document.spec.DeleteItemSpec;
 import com.amazonaws.services.dynamodbv2.document.spec.QuerySpec;
 import com.amazonaws.services.dynamodbv2.document.utils.ValueMap;
-import com.amazonaws.services.dynamodbv2.model.CreateTableRequest;
-import com.amazonaws.services.dynamodbv2.model.KeySchemaElement;
-import com.amazonaws.services.dynamodbv2.model.KeyType;
+import com.google.gson.Gson;
 import com.spotonresponse.adapter.model.MappedRecordJson;
+import com.spotonresponse.adapter.model.Util;
+
+import java.util.*;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.json.JSONArray;
 
-import java.util.*;
 
 public class DynamoDBRepository {
 
@@ -71,6 +73,19 @@ public class DynamoDBRepository {
 
         final ItemCollection<QueryOutcome> items = table.query(querySpec);
         return items;
+    }
+
+    private List<Map<String, Object>> querRecordList(String title) {
+        List<Map<String, Object>> list = new ArrayList<>();
+        ItemCollection<QueryOutcome> items = query(title);
+        if (items != null) {
+            IteratorSupport<Item, QueryOutcome> iteratorSupport = items.iterator();
+            while (iteratorSupport.hasNext()) {
+                Item item = iteratorSupport.next();
+                list.add(item.getRawMap("item"));
+            }
+        }
+        return list;
     }
 
     private Map<String, String> queryItems(final String title) {
@@ -235,6 +250,26 @@ public class DynamoDBRepository {
         return isSuccess;
     }
 
+    public boolean createEntry(Map<String, Object> m) {
+        if (table == null)
+            return false;
+        logger.debug("createEntry: ");
+        String creator = (String)m.get("creator");
+        String primaryKey = (String)m.get("md5hash");
+        String item = (new Gson()).toJson(m);
+        try {
+            table.putItem((new Item()).withPrimaryKey("md5hash", primaryKey, "title", creator)
+                    .withJSON("item", item));
+        } catch (Exception e) {
+            logger.error("createEntry: Creator: [{}] MD5HASH: [{}]\nItem: [{}]\n Error: [{}]", creator, primaryKey, item, e
+
+                    .getMessage());
+            return false;
+        }
+        return true;
+    }
+
+
     public boolean createEntry(final MappedRecordJson item) {
 
         if (table == null) {
@@ -252,4 +287,43 @@ public class DynamoDBRepository {
         }
         return true;
     }
+
+
+    public void update(String title, Map<String, Object> updateMap) {
+        String timestamp = (new Date()).toString();
+        List<Map<String, Object>> list = querRecordList(title);
+        for (Map<String, Object> item : list) {
+            for (String key : updateMap.keySet())
+                updateOrAdd(item, key, (String)updateMap.get(key), true);
+            updateOrAdd(item, "lastUpdated", timestamp, false);
+            updateOrAdd(item, "md5hash",
+
+                    Util.ToHash((String)item.get("md5hash")), false);
+            String uuid = (String)item.get("uuid");
+            deleteEntry(new AbstractMap.SimpleImmutableEntry<>(title, uuid));
+            createEntry(item);
+        }
+    }
+
+    private String replaceInContent(String content, String oldValue, String newValue) {
+        if (oldValue == null) {
+            content = content + ":" + newValue;
+        } else if (oldValue.equals(" ")) {
+            content = content.replaceFirst("::", ":" + newValue + ":");
+        } else {
+            content = content.replace(oldValue, newValue);
+        }
+        return content;
+    }
+
+    private void updateOrAdd(Map<String, Object> m, String key, String value, boolean isContent) {
+        String oldValue = (String)m.remove(key);
+        m.put(key, value);
+        if (isContent) {
+            String content = (String)m.remove("content");
+            m.put("content", replaceInContent(content, oldValue, value));
+        }
+    }
+
+
 }

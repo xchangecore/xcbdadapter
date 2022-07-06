@@ -22,7 +22,7 @@ import java.util.Set;
 
 /*
  * This is the base CSV parser, it will take Configuration model and rows of data which is Map<String, String>
- * It will return MappedRecord list and MappedRecordJson for NoSQL inject 
+ * It will return MappedRecord list and MappedRecordJson for NoSQL inject
 */
 public class TheCSVParser {
 
@@ -88,6 +88,17 @@ public class TheCSVParser {
         return mappedRecordList;
     }
 
+    public Set<String> getNotMatchedKeySet() {
+        Set<String> keySet = new HashSet<>();
+        for (MappedRecord r : this.notMatchedList)
+            keySet.add(r.getIndex());
+        return keySet;
+    }
+
+    public List<MappedRecord> getNotMatchedList() {
+        return this.notMatchedList;
+    }
+
     public Set<String> getNotMatchedKeSet() {
 
         final Set<String> keySet = new HashSet<String>();
@@ -97,9 +108,6 @@ public class TheCSVParser {
         return keySet;
     }
 
-    public List<MappedRecord> getNotMatchedList() {
-        return notMatchedList;
-    }
 
     public Map<String, MappedRecordJson> getJsonRecordMap() {
 
